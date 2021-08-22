@@ -1,0 +1,11 @@
+body {
+  background-color: #C9B79C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#sticker {
+  max-height: 95vh;
+}
