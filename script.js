@@ -42,7 +42,7 @@ function imagePasted(pasteEvent, callback) {
   for (var i = 0; i < items.length; i++) {
     
     // Special case for URLs
-    if (items[i].type.indexOf("url") != -1
+    if ((items[i].type.indexOf("url") != -1 || items[i].type.indexOf("uri") != -1)
         && pasteEvent.dataTransfer.getData(items[i].type).replace("//", "").indexOf("//") == -1) {
       fetch(pasteEvent.dataTransfer.getData(items[i].type))
       .then(res => res.blob())
@@ -58,6 +58,7 @@ function imagePasted(pasteEvent, callback) {
     if (items[i].type.indexOf("image") == -1) {
       continue;
     }
+
     // Retrieve image on clipboard as blob
     var blob = items[i].getAsFile();
 
@@ -65,6 +66,7 @@ function imagePasted(pasteEvent, callback) {
       callback(blob);
     }
     break;
+
   }
 }
 
@@ -91,7 +93,7 @@ function updateCanvas() {
   ctx.drawImage(img, centerx+canvas.width, centery+canvas.height);
 
   ctx.shadowColor = "white";
-  ctx.shadowBlur = 0;
+  ctx.shadowBlur = 3;
 
   // Offset loop
   for (let i = 0; i < quality; i++) {
